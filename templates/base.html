@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../static/" data-template="vertical-menu-template-semi-dark">
+<html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-semi-dark" data-assets-path="/static/" data-template="vertical-menu-template-semi-dark">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
@@ -9,7 +9,7 @@
     <meta name="description" content="Materialize – is the most developer friendly &amp; highly customizable Admin Dashboard Template." />
     <meta name="keywords" content="dashboard, material, material design, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="{% static "img/favicon/favicon.ico" %}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,10 +60,11 @@
                 <div class="content-wrapper">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <div class="row gy-4">
-                            {% block content %}
-                            {% endblock %}
-                        </div>
+
+                        {% include "includes/messages.html" %}
+
+                        {% block content %}
+                        {% endblock %}
                     </div>
                     <!-- / Content -->
 
@@ -103,5 +104,8 @@
     <script src="{% static 'js/main.js' %}"></script>
     <!-- Page JS -->
     <script src="{% static 'js/dashboards-analytics.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    {% block footer %}
+    {% endblock %}
 </body>
 </html>

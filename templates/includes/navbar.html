@@ -37,17 +37,17 @@
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
                                     <a class="dropdown-item" href="pages-account-settings-account.html">
-                                    <div class="d-flex">
-                                        <div class="flex-shrink-0 me-3">
-                                        <div class="avatar avatar-online">
-                                            <img src="{% static 'img/avatars/1.png' %}" alt class="w-px-40 h-auto rounded-circle">
+                                        <div class="d-flex">
+                                            <div class="flex-shrink-0 me-3">
+                                                <div class="avatar avatar-online">
+                                                    <img src="{% static 'img/avatars/1.png' %}" alt class="w-px-40 h-auto rounded-circle">
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <span class="fw-semibold d-block">{{ request.user.get_full_name }}</span>
+                                                <small class="text-muted">{{ request.user.username }}</small>
+                                            </div>
                                         </div>
-                                        </div>
-                                        <div class="flex-grow-1">
-                                        <span class="fw-semibold d-block">Juanito Ortega</span>
-                                        <small class="text-muted">Admin</small>
-                                        </div>
-                                    </div>
                                     </a>
                                 </li>
                                 <li>
@@ -55,23 +55,23 @@
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="pages-profile-user.html">
-                                    <i class="mdi mdi-account-outline me-2"></i>
-                                    <span class="align-middle">Mi perfil</span>
+                                        <i class="mdi mdi-account-outline me-2"></i>
+                                        <span class="align-middle">Mi perfil</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="pages-account-settings-account.html">
-                                    <i class="mdi mdi-cog-outline me-2"></i>
-                                    <span class="align-middle">Configuración</span>
+                                    <a class="dropdown-item" href="{% url "preferences" %}">
+                                        <i class="mdi mdi-cog-outline me-2"></i>
+                                        <span class="align-middle">Configuración</span>
                                     </a>
                                 </li>
                                 <li>
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="auth-login-cover.html" target="_blank">
-                                    <i class="mdi mdi-logout me-2"></i>
-                                    <span class="align-middle">Cerrar sesión</span>
+                                    <a class="dropdown-item" href="{% url "logout" %}">
+                                        <i class="mdi mdi-logout me-2"></i>
+                                        <span class="align-middle">Cerrar sesión</span>
                                     </a>
                                 </li>
                             </ul>

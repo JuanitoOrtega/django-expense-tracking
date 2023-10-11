@@ -1,5 +1,41 @@
 {% extends "base.html" %}
 
 {% block content %}
+        <div class="row">
+            <div class="col-6">
+                <h4 class="fw-bold py-3 mb-2">
+                    Gastos
+                </h4>
+            </div>
+            <div class="col-6">
+                <div class="mt-2 text-end">
+                    <a href="{% url "add_expense" %}" class="btn btn-primary">Añadir gasto</a>
+                </div>
+            </div>
+        </div>
 
+        <div class="card">
+            <div class="card-datatable table-responsive pt-0">
+                <table class="datatables-basic table table-bordered">
+                    <thead>
+                        <tr>
+                            <th width="25%">Fecha</th>
+                            <th width="15%">Categoría</th>
+                            <th>Descripción</th>
+                            <th width="15%">Monto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for expense in expenses %}
+                        <tr>
+                            <td>{{ expense.date }}</td>
+                            <td>{{ expense.category }}</td>
+                            <td>{{ expense.description }}</td>
+                            <td class="text-end fw-bold">{{ expense.amount|floatformat:2 }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
 {% endblock %}
