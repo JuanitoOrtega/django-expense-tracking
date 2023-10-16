@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+        <div class="row">
+            <div class="col-6">
+                <h4 class="fw-bold py-3 mb-2">
+                    Gastos
+                </h4>
+            </div>
+            <div class="col-6">
+                <div class="mt-2 text-end">
+                    <a href="{% url "add_expense" %}" class="btn btn-primary">Añadir gasto</a>
+                </div>
+            </div>
+        </div>
+{% endblock %}

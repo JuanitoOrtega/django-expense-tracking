@@ -48,6 +48,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     # Apps
     'apps.expenses',
+    'apps.incomes',
     'apps.authentication',
     'apps.userpreferences',
 ]

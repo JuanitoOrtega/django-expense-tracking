@@ -3,11 +3,11 @@ from .models import Category, Expense
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'owner')
+    list_display = ['name', 'owner']
 
 
 class ExpenseAdmin(admin.ModelAdmin):
-    list_display = ('owner', 'amount', 'description', 'category', 'date')
+    list_display = ['amount', 'description', 'owner', 'category', 'date']
 
 
 admin.site.register(Category, CategoryAdmin)

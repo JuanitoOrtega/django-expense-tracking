@@ -1,7 +1,7 @@
     <!-- Menu -->
     <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
         <div class="app-brand demo ">
-            <a href="{% url "expenses" %}" class="app-brand-link">
+            <a href="{% url "home" %}" class="app-brand-link">
                 <span class="app-brand-logo demo">
                     <span style="color:var(--bs-primary);">
                         <svg width="268" height="150" viewBox="0 0 38 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -38,20 +38,20 @@
         <div class="menu-inner-shadow"></div>
         <ul class="menu-inner py-1">
             <!-- Dashboards -->
-            <li class="menu-item active open">
-                <a href="{% url "expenses" %}" class="menu-link">
+            <li class="menu-item{% if '/' == request.path %} active{% endif %}">
+                <a href="{% url "home" %}" class="menu-link">
                     <i class="menu-icon tf-icons mdi mdi-home-outline"></i>
                     <div data-i18n="Dashboard">Dashboard</div>
                 </a>
             </li>
-            <li class="menu-item">
+            <li class="menu-item{% if 'expenses' in request.path %} active{% endif %}">
                 <a href="{% url "expenses" %}" class="menu-link">
                     <i class="menu-icon tf-icons mdi mdi-cash-minus"></i>
                     <div data-i18n="Gastos">Gastos</div>
                 </a>
             </li>
-            <li class="menu-item">
-                <a href="app-email.html" class="menu-link">
+            <li class="menu-item{% if 'incomes' in request.path %} active{% endif %}">
+                <a href="{% url "incomes" %}" class="menu-link">
                     <i class="menu-icon tf-icons mdi mdi-cash-plus"></i>
                     <div data-i18n="Ingresos">Ingresos</div>
                 </a>

@@ -1,0 +1,31 @@
+#header {
+    background: #003e45;
+    color: #fff;
+}
+
+div.breadcrumbs, .module caption {
+    background: #3d586a;
+}
+
+#branding h1 a:visited {
+    color: #fff;
+}
+
+#branding h1 {
+    color: #fff;
+}
+
+.theme-toggle svg.theme-icon-when-auto,
+.theme-toggle svg.theme-icon-when-dark,
+.theme-toggle svg.theme-icon-when-light {
+    color: #003e45;
+}
+
+#login-form .submit-row input {
+    width: 100%;
+    background: #3d586a;
+}
+
+input[type=submit]:hover {
+    background: #003e45;
+}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+            <h4 class="fw-bold py-3 mb-2">
+                Eliminar gasto
+            </h4>
+            <div class="row">
+                <!-- Floating (Filled) -->
+                <div class="col-md-12">
+                    <div class="card mb-4">
+                        <h5 class="card-header text-danger fw-bold">¿Estás seguro que deseas eliminar este gasto?</h5>
+                        <div class="card-body">
+                            <div class="card-datatable table-responsive mb-3">
+                                <table class="datatables-basic table table-bordered">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th width="235px">Fecha</th>
+                                            <th width="150px">Categoría</th>
+                                            <th>Detalle</th>
+                                            <th width="130px">Monto</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ expense.date }}</td>
+                                            <td>{{ expense.category }}</td>
+                                            <td>{{ expense.description }}</td>
+                                            <td class="text-end fw-bold">{{ expense.amount|floatformat:2 }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-12 d-flex justify-content-between">
+                                        <a href="{% url 'expenses' %}" class="btn btn-secondary">Cancelar</a>
+                                        <button type="submit" class="btn btn-danger">Confirmar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% endblock %}

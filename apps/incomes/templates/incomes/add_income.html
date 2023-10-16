@@ -2,14 +2,14 @@
 
 {% block content %}
             <h4 class="fw-bold py-3 mb-2">
-                Añadir gasto
+                Añadir ingreso
             </h4>
             <div class="row">
                 <!-- Floating (Filled) -->
                 <div class="col-md-12">
                     <div class="card mb-4">
                         <div class="card-body demo-vertical-spacing demo-only-element">
-                            <form action="{% url "add_expense" %}" method="POST">
+                            <form action="{% url "add_income" %}" method="POST">
                                 {% csrf_token %}
                                 <div class="input-group input-group-floating mb-4">
                                     <div class="form-floating">
@@ -25,13 +25,13 @@
                                     </div>
                                 </div>
                                 <div class="form-floating mb-4">
-                                    <select class="form-select" name="category" id="category">
-                                        <option>Selecciona categoría del gasto</option>
-                                        {% for category in categories %}
-                                        <option value="{{ category.id }}">{{ category.name }}</option>
+                                    <select class="form-select" name="source" id="source">
+                                        <option>Selecciona fuente del ingreso</option>
+                                        {% for source in sources %}
+                                        <option value="{{ source.id }}">{{ source.name }}</option>
                                         {% endfor %}
                                     </select>
-                                    <label for="category">Categoría</label>
+                                    <label for="source">Fuene</label>
                                 </div>
                                 <div class="input-group input-group-floating mb-4">
                                     <div class="form-floating">
