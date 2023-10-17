@@ -5,13 +5,10 @@
                 <!-- Register Card -->
                 <div class="card p-2">
                     {% include "authentication/includes/logo.html" %}
-
                     <div class="card-body mt-2">
                         <h4 class="mb-2 fw-semibold">Registra una cuenta gratuita 🚀</h4>
                         <p class="mb-4">Administra tus finanzas personales de una manera fácil y divertida!</p>
-
                         {% include '../includes/messages.html' %}
-
                         <form id="formAuthentication" class="mb-3" action="{% url 'register' %}" method="POST">
                             {% csrf_token %}
                             <div class="form-floating form-floating-outline mb-3">

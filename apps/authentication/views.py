@@ -12,6 +12,18 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.sites.shortcuts import get_current_site
 from .utils import account_activation_token
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.core.exceptions import ObjectDoesNotExist
+import threading
+
+
+class EmailThread(threading.Thread):
+    def __init__(self, email):
+        self.email = email
+        threading.Thread.__init__(self)
+
+    def run(self):
+        self.email.send(fail_silently=False)
 
 
 class EmailValidationView(View):
@@ -97,7 +109,7 @@ class RegistrationView(View):
                     reply_to=["ortegaj83@gmail.com"],
                 )
 
-                email.send(fail_silently=False)
+                EmailThread(email).start()
 
                 messages.success(request, 'Cuenta registrada exitosamente')
 
@@ -167,5 +179,88 @@ class LogoutView(View):
         return redirect('login')
 
 
-def reset_password(request):
-    return render(request, 'authentication/new_password.html')
+class RequestPasswordView(View):
+    def get(self, request):
+        return render(request, 'authentication/request_password.html')
+
+    def post(self, request):
+        email = request.POST.get('email')
+
+        context = {
+            'values': request.POST,
+        }
+
+        if not validate_email(email):
+            messages.error(request, 'Por favor ingrese un correo válido')
+            return render(request, 'authentication/request_password.html', context)
+
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            user = None
+
+        if user:
+            current_site = get_current_site(request)
+            uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
+
+            token = PasswordResetTokenGenerator().make_token(user)
+
+            link = reverse('reset_password', kwargs={
+                'uidb64': uidb64,
+                'token': token
+            })
+
+            request_password = 'http://' + current_site.domain + link
+
+            email_subject = 'Restablece tu contraseña'
+            email_body = f'Hola {user.username}. Por favor usa este enlace para restablecer tu contraseña:\n{request_password}'
+
+            email = EmailMessage(
+                email_subject,
+                email_body,
+                "ortegaj83@gmail.com",
+                [email],
+                reply_to=["ortegaj83@gmail.com"],
+            )
+
+            EmailThread(email).start()
+
+        messages.success(request, 'Te hemos enviado instrucciones para restablecer tu contraseña')
+
+        return redirect('request_password')
+
+
+class ResetPasswordView(View):
+    def get(self, request, uidb64, token):
+        try:
+            id_bytes = urlsafe_base64_decode(uidb64)
+            id_str = id_bytes.decode('utf-8')
+            user = User.objects.get(pk=id_str)
+            return render(request, 'authentication/reset_password.html', {'uidb64': uidb64, 'token': token, 'user': user})
+        except (ValueError, ObjectDoesNotExist):
+            messages.error(request, 'Enlace no válido para restablecer la contraseña')
+            return redirect('login')
+
+    def post(self, request, uidb64, token):
+        try:
+            id_bytes = urlsafe_base64_decode(uidb64)
+            id_str = id_bytes.decode('utf-8')
+            user = User.objects.get(pk=id_str)
+        except (ValueError, ObjectDoesNotExist):
+            messages.error(request, 'Enlace no válido para restablecer la contraseña')
+            return redirect('login')
+
+        password = request.POST['password']
+        confirm_password = request.POST['confirm-password']
+
+        if password != confirm_password:
+            messages.error(request, 'Las contraseñas no coinciden')
+        elif len(password) < 6:
+            messages.error(request, 'La contraseña debe tener al menos 6 caracteres')
+        else:
+            user.set_password(password)
+            user.save()
+            messages.success(request, 'Contraseña restablecida exitosamente')
+            return redirect('login')
+
+        return render(request, 'authentication/reset_password.html', {'uidb64': uidb64, 'token': token, 'user': user})

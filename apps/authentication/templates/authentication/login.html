@@ -5,13 +5,10 @@
                 <!-- Login -->
                 <div class="card p-2">
                     {% include "authentication/includes/logo.html" %}
-
                     <div class="card-body mt-2">
                         <h4 class="mb-2 fw-semibold">Bienvenido a My Wallet 👋</h4>
                         <p class="mb-4">Por favor inicia sesión en tu cuenta para empezar la aventura</p>
-
                         {% include '../includes/messages.html' %}
-
                         <form id="formAuthentication" class="mb-3" action="{% url "login" %}" method="POST">
                             {% csrf_token %}
                             <div class="form-floating form-floating-outline mb-3">
@@ -36,7 +33,7 @@
                                         Recordarme
                                     </label>
                                 </div>
-                                <a href="auth-forgot-password-basic.html" class="float-end mb-1">
+                                <a href="{% url "request_password" %}" class="float-end mb-1">
                                     <span>¿Olvidaste tu contraseña?</span>
                                 </a>
                             </div>
