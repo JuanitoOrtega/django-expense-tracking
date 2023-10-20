@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+        <div class="row">
+            <div class="col-6">
+                <h4 class="fw-bold py-3 mb-2">
+                    Resumen de gastos
+                </h4>
+            </div>
+            <div class="col-6">
+                <div class="mt-2 text-end">
+                    <a href="{% url "expenses" %}" class="btn btn-primary">Gastos</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Line Charts -->
+            <div class="col-12 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Statistics</h5>
+                        <small class="text-muted">Commercial networks and enterprises</small>
+                    </div>
+                    <div class="card-body pt-2">
+                        <canvas id="myChart" width="400" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+            <!-- /Line Charts -->
+        </div>
+{% endblock %}
+
+{% block footer %}
+    <script src="{% static "expenses/js/stats.js" %}"></script>
+{% endblock  %}

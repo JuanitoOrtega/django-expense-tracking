@@ -21,8 +21,7 @@ div.breadcrumbs, .module caption {
     color: #003e45;
 }
 
-#login-form .submit-row input {
-    width: 100%;
+.submit-row input {
     background: #3d586a;
 }
 

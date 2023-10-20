@@ -1,0 +1,200 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Reporte de gastos</title>
+    <meta name="description" content="Reporte de gastos">
+    <style>
+        @font-face {
+            font-family: Pacifico;
+            src: url(pacifico.ttf);
+        }
+        @font-face {
+            font-family: Source Sans Pro;
+            font-weight: 400;
+            src: url(sourcesanspro-regular.otf);
+        }
+        @font-face {
+            font-family: Source Sans Pro;
+            font-weight: 700;
+            src: url(sourcesanspro-bold.otf);
+        }
+
+        @page {
+            size: A4;
+            font-family: Pacifico;
+            margin: 2cm;
+            @bottom-left {
+                color: #a9a;
+                content: 'Hecho con ❤️ en Bolivia 🇧🇴';
+                font-size: 9pt;
+            }
+            @bottom-center {
+                color: #a9a;
+                content: 'ceo@creativa.dev | creativa.dev';
+                font-size: 9pt;
+            }
+            @bottom-right {
+                color: #a9a;
+                content: 'Página ' counter(page) ' de ' counter(pages);
+                font-size: 9pt;
+            }
+        }
+
+        html {
+            color: #14213d;
+            font-family: Source Sans Pro;
+            font-size: 11pt;
+            line-height: 1.6;
+        }
+        body {
+            margin: 0;
+        }
+
+        h1 {
+            color: #1ee494;
+            font-family: Pacifico;
+            font-size: 20pt;
+            margin: 0;
+        }
+
+        aside {
+            display: flex;
+            margin: 2em 0 4em;
+        }
+        aside address {
+            font-style: normal;
+            white-space: pre-line;
+        }
+        aside address#from {
+            color: #a9a;
+            flex: 1;
+        }
+        aside address#to {
+            text-align: right;
+        }
+
+        dl {
+            position: absolute;
+            right: 0;
+            text-align: right;
+            top: 0;
+        }
+        dt, dd {
+            display: inline;
+            margin: 0;
+        }
+        dt {
+            color: #a9a;
+        }
+        dt::before {
+            content: '';
+            display: block;
+        }
+        dt::after {
+            content: ':';
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th {
+            border-bottom: .2mm solid #a9a;
+            color: #a9a;
+            font-size: 10pt;
+            font-weight: 400;
+            padding-bottom: .25cm;
+            text-transform: uppercase;
+        }
+        td {
+            padding-top: 7mm;
+        }
+        td:last-of-type {
+            color: #1ee494;
+            font-weight: bold;
+            text-align: right;
+        }
+        th, td {
+            text-align: left;
+        }
+        th:first-of-type, td:first-of-type {
+            text-align: left;
+        }
+        th:last-of-type, td:last-of-type {
+            text-align: right;
+        }
+        table#total {
+            background: #f6f6f6;
+            border-color: #f6f6f6;
+            border-style: solid;
+            border-width: 2cm 3cm;
+            bottom: 0;
+            font-size: 20pt;
+            margin: 0 -3cm;
+            position: absolute;
+            width: 20cm;
+        }
+        .total-row td {
+            font-size: 15pt;
+        }
+    </style>
+</head>
+<body>
+    <h1>Reporte de gastos</h1>
+
+    <aside>
+        <address id="from">
+            My Wallet
+        </address>
+
+        <address id="to">
+            Has el bien aunque nadie te vea
+        </address>
+    </aside>
+
+    <dl id="informations">
+        <dt>Fecha</dt>
+        <dd>{% now "d/m/Y H:i:s" %}</dd>
+    </dl>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Descripción</th>
+                <th>Categoría</th>
+                <th>Fecha</th>
+                <th>Monto</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ expense.description }}</td>
+                <td>{{ expense.category.name }}</td>
+                <td>{{ expense.date }}</td>
+                <td>{{ expense.amount|floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <table id="total">
+        <thead>
+            <tr>
+                <th>Fecha de reporte</th>
+                <th>Usuario</th>
+                <th>Monto total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="total-row">
+                <td>{% now "d/m/Y" %}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ total|floatformat:2 }}</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

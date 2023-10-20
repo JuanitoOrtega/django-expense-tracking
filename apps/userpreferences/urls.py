@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import index
+from .views import user_preferences
 
 
 urlpatterns = [
-    path('', index, name='preferences'),
+    path('', user_preferences, name='user_preferences'),
 ]

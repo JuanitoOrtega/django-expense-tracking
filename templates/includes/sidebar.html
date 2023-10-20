@@ -44,7 +44,7 @@
                     <div data-i18n="Dashboard">Dashboard</div>
                 </a>
             </li>
-            <li class="menu-item{% if 'expenses' in request.path %} active{% endif %}">
+            <li class="menu-item{% if '/expenses/' == request.path or '/expenses/add-expense/' == request.path or '/expenses/edit/' in request.path or '/expenses/delete/' in request.path %} active{% endif %}">
                 <a href="{% url "expenses" %}" class="menu-link">
                     <i class="menu-icon tf-icons mdi mdi-cash-minus"></i>
                     <div data-i18n="Gastos">Gastos</div>
@@ -60,8 +60,8 @@
             <li class="menu-header fw-light mt-4">
                 <span class="menu-header-text">Resumen</span>
             </li>
-            <li class="menu-item">
-                <a href="app-email.html" class="menu-link">
+            <li class="menu-item{% if '/expenses/expense-summary/' == request.path %} active{% endif %}">
+                <a href="{% url "expense_summary" %}" class="menu-link">
                     <i class="menu-icon tf-icons mdi mdi-minus-box-multiple-outline"></i>
                     <div data-i18n="Resumen de Gastos">Resumen de Gastos</div>
                 </a>
@@ -77,7 +77,7 @@
                 <span class="menu-header-text">Preferencias</span>
             </li>
             <li class="menu-item">
-                <a href="{% url "preferences" %}" class="menu-link">
+                <a href="{% url "user_preferences" %}" class="menu-link">
                     <i class="menu-icon tf-icons mdi mdi-cog-outline"></i>
                     <div data-i18n="Configuración">Configuración</div>
                 </a>

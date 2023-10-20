@@ -10,7 +10,7 @@
                 <div class="card mb-4">
                     <h5 class="card-header">Moneda</h5>
                     <div class="card-body demo-vertical-spacing demo-only-element">
-                        <form action="{% url "preferences" %}" method="POST">
+                        <form action="{% url "user_preferences" %}" method="POST">
                             {% csrf_token %}
                             <div class="form-floating form-floating-outline mb-4">
                                 <select class="form-select" id="currency" name="currency">
@@ -30,15 +30,60 @@
             <!-- Input Sizing -->
             <div class="col-md-6">
                 <div class="card mb-4">
-                    <h5 class="card-header">Input Sizing</h5>
+                    <h5 class="card-header">Categorías</h5>
                     <div class="card-body demo-vertical-spacing demo-only-element">
-                        <div class="form-floating form-floating-outline mb-4">
-                            <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
-                                <option selected>Seleccionar moneda</option>
-                                <option value="1">USD</option>
-                                <option value="2">BOB</option>
-                            </select>
-                            <label for="exampleFormControlSelect1">Moneda por defecto</label>
+                        <form action="{% url "user_preferences" %}" method="POST">
+                            {% csrf_token %}
+                            <div class="col-12">
+                                <small class="text-light fw-medium d-block">Selecciona un color</small>
+                                <div class="d-flex flex-wrap mt-2">
+                                    <div class="form-check form-check-primary me-3 mb-3">
+                                        <input name="color" class="form-check-input" type="radio" value="primary" id="primary">
+                                        <label class="form-check-label" for="primary">Azul</label>
+                                    </div>
+                                    <div class="form-check form-check-secondary me-3 mb-3">
+                                        <input name="color" class="form-check-input" type="radio" value="secondary" id="secondary">
+                                        <label class="form-check-label" for="secondary">Gris</label>
+                                    </div>
+                                    <div class="form-check form-check-success me-3 mb-3">
+                                        <input name="color" class="form-check-input" type="radio" value="success" id="success">
+                                        <label class="form-check-label" for="success">Verde</label>
+                                    </div>
+                                    <div class="form-check form-check-danger me-3 mb-3">
+                                        <input name="color" class="form-check-input" type="radio" value="danger" id="danger">
+                                        <label class="form-check-label" for="danger">Rojo</label>
+                                    </div>
+                                    <div class="form-check form-check-warning me-3 mb-3">
+                                        <input name="color" class="form-check-input" type="radio" value="warning" id="warning">
+                                        <label class="form-check-label" for="warning">Amarillo</label>
+                                    </div>
+                                    <div class="form-check form-check-info me-3 mb-3">
+                                        <input name="color" class="form-check-input" type="radio" value="info" id="info">
+                                        <label class="form-check-label" for="info">Celeste</label>
+                                    </div>
+                                    <div class="form-check form-check-dark me-3 mb-3">
+                                        <input name="color" class="form-check-input" type="radio" value="dark" id="dark">
+                                        <label class="form-check-label" for="dark">Negro</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <div class="form-floating form-floating-outline">
+                                    <input type="text" class="form-control" name="category" placeholder="Ingresa un nombre de caregoría">
+                                    <label for="basic-addon13">Registrar categoría</label>
+                                </div>
+                                <button class="btn btn-outline-primary waves-effect" type="submit">Registrar</button>
+                            </div>
+                        </form>
+                        <div class="row">
+                            <div class="col-12">
+                                <small class="text-light fw-medium d-block">Mis categorías</small>
+                                <div class="d-flex flex-wrap mt-2">
+                                    {% for category in categories %}
+                                    <span class="badge rounded-pill bg-{{ category.color }} py-2 px-3 me-2 mb-2">{{ category.name }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -14,6 +14,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from .utils import account_activation_token
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.core.exceptions import ObjectDoesNotExist
+from django.conf import settings
 import threading
 
 
@@ -104,9 +105,9 @@ class RegistrationView(View):
                 email = EmailMessage(
                     email_subject,
                     email_body,
-                    "ortegaj83@gmail.com",
+                    settings.EMAIL_HOST_USER,
                     [email],
-                    reply_to=["ortegaj83@gmail.com"],
+                    reply_to=[settings.EMAIL_HOST_USER],
                 )
 
                 EmailThread(email).start()
@@ -218,9 +219,9 @@ class RequestPasswordView(View):
             email = EmailMessage(
                 email_subject,
                 email_body,
-                "ortegaj83@gmail.com",
+                settings.EMAIL_HOST_USER,
                 [email],
-                reply_to=["ortegaj83@gmail.com"],
+                reply_to=[settings.EMAIL_HOST_USER],
             )
 
             EmailThread(email).start()

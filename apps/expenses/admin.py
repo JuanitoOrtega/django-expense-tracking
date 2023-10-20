@@ -3,7 +3,9 @@ from .models import Category, Expense
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['name', 'owner']
+    list_display = ['name', 'owner', 'color']
+    list_filter = ['owner']
+    # list_editable = ['name']
 
 
 class ExpenseAdmin(admin.ModelAdmin):

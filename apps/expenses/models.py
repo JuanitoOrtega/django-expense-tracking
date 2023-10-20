@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=255, verbose_name='Categoría')
+    color = models.CharField(max_length=12, verbose_name='Color')
     owner = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Usuario')
 
     class Meta:

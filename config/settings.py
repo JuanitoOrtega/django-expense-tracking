@@ -160,7 +160,6 @@ MESSAGE_TAGS = {
 # Email settings
 EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
 EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
-# DEFAULT_FROM_EMAIL = config('FROM_EMAIL')
 EMAIL_HOST_USER = config('EMAIL_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_PASS')
 EMAIL_USE_TLS = config('EMAIL_TLS', default=True, cast=bool)
